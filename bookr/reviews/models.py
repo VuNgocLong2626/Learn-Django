@@ -25,9 +25,21 @@ class Book(models.Model):
                                   on_delete=models.CASCADE)
     contributors = models.ManyToManyField('Contributor',
                                           through="BookContributor")
+    cover = models.ImageField(null=True,
+                              blank=True,
+                              upload_to="book_covers/")
+    sample = models.FileField(null=True,
+                              blank=True,
+                              upload_to="book_samples/")
 
     def __str__(self):
-        return self.title
+        return "{} ({})".format(self.title, self.isbn)
+
+    def isbn13(self):
+        """ '9780316769174' => '978-0-31-676917-4' """
+        return "{}-{}-{}-{}-{}".format(self.isbn[0:3], self.isbn[3:4],
+                                       self.isbn[4:6], self.isbn[6:12],
+                                       self.isbn[12:13])
 
 
 class Contributor(models.Model):

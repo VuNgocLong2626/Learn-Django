@@ -1,0 +1,18 @@
+/* body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: pink;
+} */
+
+
+.navbar {
+    min-height: 100px;
+    font-size: 25px;
+  }
+  .navbar-brand {
+    font-size: 25px;
+  }
+
+  .navbar-brand > img {
+      height: 60px;
+  }

@@ -15,12 +15,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from django.views.generic import TemplateView
+from django.conf import settings
+from django.conf.urls.static import static
+from django.contrib import admin
+from django.urls import include, path
 # import reviews.views
+
+from bookr.views import profile
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('reviews.urls')),
+    path('main/', TemplateView.as_view(template_name='index.html')),
     # path('book-search/', reviews.views.book_search)
+    path('accounts/', include(('django.contrib.auth.urls', 'auth'),
+         namespace='accounts')),
+    path('accounts/profile/', profile, name='profile'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
