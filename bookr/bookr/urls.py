@@ -22,17 +22,18 @@ from django.contrib import admin
 from django.urls import include, path
 # import reviews.views
 
-from bookr.views import profile
+import bookr.views
+# from bookr_admin.admin import admin_site
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     path('', include('reviews.urls')),
     path('main/', TemplateView.as_view(template_name='index.html')),
-    # path('book-search/', reviews.views.book_search)
-    path('accounts/', include(('django.contrib.auth.urls', 'auth'),
-         namespace='accounts')),
-    path('accounts/profile/', profile, name='profile'),
+    path('accounts/profile/', bookr.views.profile, name='profile'),
+    path('admin/', admin.site.urls),
+    #  path('admin/', admin_site.urls),
+    path('admin/', admin.site.urls),
+    
 ]
 
 if settings.DEBUG:
